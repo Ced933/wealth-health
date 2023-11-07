@@ -1,0 +1,38 @@
+.form{
+    border: 1px solid black ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    .form-container{
+        width: 20%;
+        padding: 30px;
+        background-color: #3849AB;
+        .input-type{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            label{
+                color: #fff;
+            }
+            .input-style{
+                padding: 10px;
+                margin-top: 5Px;
+                border-radius: 10px;
+                background-color: transparent;
+                border: 2px solid #fff;
+                color: #fff;
+                
+            }
+            
+        }
+        .button{
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #000;
+        }
+    }
+}
