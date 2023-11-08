@@ -7,7 +7,6 @@ import PopUp from '../../components/popUp/PopUp';
 export default function Home() {
   return (
     <div className='home'>
-        <PopUp/>
         <Link to={'/employee'}>
             Current employee
         </Link>
