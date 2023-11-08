@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import './Form.scss';
+import { useDispatch } from 'react-redux';
 
 export default function () {
-    const [startDate, setStartDate] = useState(new Date());
- console.log(startDate)
-console.log(startDate.toLocaleDateString('fr-FR'))
+    // const [startDate, setStartDate] = useState(new Date());
+//  console.log(startDate)
+// console.log(startDate.toLocaleDateString('fr-FR'))
+const dispatch = useDispatch();
+
     const [employeeData, setEmployeeData] = useState({
         firstName: "",
         lastName:"",
@@ -39,7 +42,26 @@ console.log(employeeData.street);
 console.log(employeeData.city);
 console.log(employeeData.zipcode);
 
+dispatch({
+    type:'employee/employeeInfo',
+    payload:{
+        firstName: employeeData.firstName,
+        lastName : employeeData.lastName,
+        dateOfBirth: employeeData.dateOfBirth,
+        startDate: employeeData.startDate,
+        street: employeeData.street,
+        city:employeeData.city,
+        zipcode:employeeData.zipcode,
+        state: employeeData.state,
+        departement:employeeData.departement
+
     }
+})
+
+    }
+
+
+
     const states = [
         {
             "name": "Alabama",

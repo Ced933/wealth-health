@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Form from '../../components/Form/Form';
 import './Home.scss';
-import PopUp from '../../components/PopUp/PopUp';
+import PopUp from '../../components/popUp/PopUp';
 
 export default function Home() {
   return (

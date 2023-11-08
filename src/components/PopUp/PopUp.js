@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import './PopUp.scss';
 
 export default function PopUp() {
+    // si show = a true alors la pop est activé si show est égale à false alors la popup disparaît 
     const [show, setShow] = useState(true);
 
     const closeModal = () =>{
+        // cette fonction fait disparaitre la popUp 
         setShow(false)
     }
   return (
