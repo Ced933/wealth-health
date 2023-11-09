@@ -12,11 +12,8 @@ export default function () {
     // const [startDate, setStartDate] = useState(new Date());
 //  console.log(startDate)
 // console.log(startDate.toLocaleDateString('fr-FR'))
-const {register, handleSubmit} = useForm();
+const {register, handleSubmit, reset, setError } = useForm();
 
-// const onSub = data =>{
-//     console.log
-// }
 
 const [popupShow, setPopupShow] = useState(false);
 const dispatch = useDispatch();
@@ -48,10 +45,7 @@ const dispatch = useDispatch();
         console.log(data)
         console.log(data.firstName)
         // console.log(employeeData.firstName);
-        // console.log(employeeData.lastName);
-        // console.log(employeeData.street);
-        // console.log(employeeData.city);
-        // console.log(employeeData.zipcode);
+      
         // si le formulaire est soumis alors on envoie le popup 
         setPopupShow(true)
 
@@ -60,22 +54,24 @@ const dispatch = useDispatch();
         //     [e.target.name]: "",
         // })
 
+        // envoyer les données remplis dans le store 
+        dispatch({
+            type:'employee/employeeInfo',
+            payload:{
+                firstName: data.firstName,
+                lastName : data.lastName,
+                dateOfBirth: data.dateOfBirth,
+                startDate: data.startDate,
+                street: data.street,
+                city:data.city,
+                zipcode:data.zipcode,
+                state: data.state,
+                departement:data.departement
 
-        // dispatch({
-        //     type:'employee/employeeInfo',
-        //     payload:{
-        //         firstName: employeeData.firstName,
-        //         lastName : employeeData.lastName,
-        //         dateOfBirth: employeeData.dateOfBirth,
-        //         startDate: employeeData.startDate,
-        //         street: employeeData.street,
-        //         city:employeeData.city,
-        //         zipcode:employeeData.zipcode,
-        //         state: employeeData.state,
-        //         departement:employeeData.departement
-
-        //     }
-        // })
+            }
+        })
+        // vider le formulaire 
+        reset()
 
     }
 
@@ -319,7 +315,12 @@ const dispatch = useDispatch();
             "abbreviation": "WY"
         }
     ];
-  
+    useEffect(() => {
+        setError("firstName", {
+          type: "manual",
+          message: "Dont Forget Your Username Should Be Cool!",
+        })
+      }, [setError])
  return (
     <form onSubmit={handleSubmit(onSubmit)} className='form'>
         {/* si popupshow = à true alors on affiche le popup  */}
@@ -336,11 +337,11 @@ const dispatch = useDispatch();
 
         <div className='input-type'>
             <label htmlFor='last-name'>Last Name</label>
-            <input  className='input-style' {...register('lastName')} name='lastName' type='text' />   
+            <input  className='input-style' required {...register('lastName')} name='lastName' type='text' />   
         </div>
         <div className='input-type'>
             <label htmlFor='date-of-birth'>Date of Birth</label>
-            <input type="date" className='input-style' {...register('dateOfBirth')} name='dateOfBirth'  />
+            <input type="date" className='input-style' required {...register('dateOfBirth')} name='dateOfBirth'  />
             {/* <DatePicker selected={startDate} name='dateOfBirth'  onChange={(date,e) => {
                 setStartDate(date)
                 //  console.log( new Date(e.timeStamp * 1000))
@@ -350,21 +351,21 @@ const dispatch = useDispatch();
         </div>
         <div className='input-type'>
             <label htmlFor='startDate'>Start Date</label>
-            <input type="date" className='input-style' {...register('startDate')} name='startDate'  />  
+            <input type="date" className='input-style' required {...register('startDate')} name='startDate'  />  
         </div>
         
         <div className='input-type'>
             <label htmlFor='street'>Street</label>
-            <input type='text' className='input-style' {...register('street')} name='street' />   
+            <input type='text' className='input-style' required {...register('street')} name='street' />   
         </div>
         <div className='input-type'>
             <label htmlFor='city'>City</label>
-            <input type='text' className='input-style' {...register('city')}  name='city' />   
+            <input type='text' className='input-style' required {...register('city')}  name='city' />   
         </div>
         <div className='input-type'>
             <label htmlFor='state'>State</label>
             
-            <select name='state' {...register('state')} >
+            <select name='state' required {...register('state')} >
                 <option></option>
                 {
                     states.map( (state) => {
@@ -375,11 +376,11 @@ const dispatch = useDispatch();
         </div>
         <div className='input-type'>
             <label htmlFor='zipcode'>Zip Code</label>
-            <input className='input-style' type='text' {...register('zipcode')} name='zipcode'/>   
+            <input className='input-style' type='number' required {...register('zipcode')} name='zipcode'/>   
         </div>
         <div className='input-type'>
             <label htmlFor='departement'>Departement</label>
-           <select name="departement" {...register('departement')} >
+           <select name="departement" required {...register('departement')} >
             <option></option>
             <option>Sales</option>
             <option>Marketing</option>
