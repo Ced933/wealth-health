@@ -16,8 +16,15 @@ const {register, handleSubmit, reset, setError } = useForm();
 
 
 const [popupShow, setPopupShow] = useState(false);
+// setPopupShow(false);
+console.log(popupShow)
 const dispatch = useDispatch();
+useEffect(()=>{
+    if(popupShow){
+        setPopupShow(false)
+    }
 
+},[popupShow])
     // const [employeeData, setEmployeeData] = useState({
     //     firstName: "",
     //     lastName:"",
@@ -56,7 +63,7 @@ const dispatch = useDispatch();
 
         // envoyer les données remplis dans le store 
         dispatch({
-            type:'employee/employeeInfo',
+            type:'employee/addEmployee',
             payload:{
                 firstName: data.firstName,
                 lastName : data.lastName,
@@ -72,7 +79,8 @@ const dispatch = useDispatch();
         })
         // vider le formulaire 
         reset()
-
+        
+       
     }
 
 
