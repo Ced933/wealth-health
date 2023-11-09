@@ -5,63 +5,77 @@ import "react-datepicker/dist/react-datepicker.css";
 import './Form.scss';
 import { useDispatch } from 'react-redux';
 import PopUp from '../popUp/PopUp';
+import { useForm } from 'react-hook-form';
+
 
 export default function () {
     // const [startDate, setStartDate] = useState(new Date());
 //  console.log(startDate)
 // console.log(startDate.toLocaleDateString('fr-FR'))
+const {register, handleSubmit} = useForm();
 
-const [popupShow, setPopupShow] = useState(false)
+// const onSub = data =>{
+//     console.log
+// }
+
+const [popupShow, setPopupShow] = useState(false);
 const dispatch = useDispatch();
 
-    const [employeeData, setEmployeeData] = useState({
-        firstName: "",
-        lastName:"",
-        dateOfBirth:"",
-        startDate:"",
-        street:"",
-        city:"",
-        state:"",
-        zipcode:"",
-        departement:"",
-    });
+    // const [employeeData, setEmployeeData] = useState({
+    //     firstName: "",
+    //     lastName:"",
+    //     dateOfBirth:"",
+    //     startDate:"",
+    //     street:"",
+    //     city:"",
+    //     state:"",
+    //     zipcode:"",
+    //     departement:"",
+    // });
 
-console.log(employeeData);
-    const changeValue = (e)=>{
-        e.preventDefault();
-        console.log(e)
-        setEmployeeData({
-            // On reprend tous les champs et chaque champs va etre remplis par ce que l'utilisateur est en train d'ecrire 
-            ...employeeData,
-            [e.target.name]: e.target.value,
-        })
-    }
+// console.log(employeeData);
+//     const changeValue = (e)=>{
+//         e.preventDefault();
+//         console.log(e)
+//         setEmployeeData({
+//             // On reprend tous les champs et chaque champs va etre remplis par ce que l'utilisateur est en train d'ecrire 
+//             ...employeeData,
+//             [e.target.name]: e.target.value,
+//         })
+//     }
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        console.log(employeeData.firstName);
-        console.log(employeeData.lastName);
-        console.log(employeeData.street);
-        console.log(employeeData.city);
-        console.log(employeeData.zipcode);
+    const onSubmit = (data)=>{
+        console.log(data)
+        console.log(data.firstName)
+        // console.log(employeeData.firstName);
+        // console.log(employeeData.lastName);
+        // console.log(employeeData.street);
+        // console.log(employeeData.city);
+        // console.log(employeeData.zipcode);
         // si le formulaire est soumis alors on envoie le popup 
         setPopupShow(true)
 
-        dispatch({
-            type:'employee/employeeInfo',
-            payload:{
-                firstName: employeeData.firstName,
-                lastName : employeeData.lastName,
-                dateOfBirth: employeeData.dateOfBirth,
-                startDate: employeeData.startDate,
-                street: employeeData.street,
-                city:employeeData.city,
-                zipcode:employeeData.zipcode,
-                state: employeeData.state,
-                departement:employeeData.departement
+        // setEmployeeData({
+        //     ...employeeData,
+        //     [e.target.name]: "",
+        // })
 
-            }
-        })
+
+        // dispatch({
+        //     type:'employee/employeeInfo',
+        //     payload:{
+        //         firstName: employeeData.firstName,
+        //         lastName : employeeData.lastName,
+        //         dateOfBirth: employeeData.dateOfBirth,
+        //         startDate: employeeData.startDate,
+        //         street: employeeData.street,
+        //         city:employeeData.city,
+        //         zipcode:employeeData.zipcode,
+        //         state: employeeData.state,
+        //         departement:employeeData.departement
+
+        //     }
+        // })
 
     }
 
@@ -307,7 +321,7 @@ console.log(employeeData);
     ];
   
  return (
-    <form onSubmit={handleSubmit} className='form'>
+    <form onSubmit={handleSubmit(onSubmit)} className='form'>
         {/* si popupshow = à true alors on affiche le popup  */}
        {
         popupShow && <PopUp/>
@@ -317,16 +331,16 @@ console.log(employeeData);
         
         <div className='input-type'>
             <label  htmlFor='firstName'>First Name</label>
-            <input className='input-style' required  onChange={changeValue} type='text' name='firstName' />   
+            <input className='input-style' required {...register('firstName')}  type='text' name='firstName' />   
         </div>
 
         <div className='input-type'>
             <label htmlFor='last-name'>Last Name</label>
-            <input  className='input-style' required onChange={changeValue} name='lastName' type='text' />   
+            <input  className='input-style' {...register('lastName')} name='lastName' type='text' />   
         </div>
         <div className='input-type'>
             <label htmlFor='date-of-birth'>Date of Birth</label>
-            <input type="date" className='input-style' name='dateOfBirth' onChange={changeValue} />
+            <input type="date" className='input-style' {...register('dateOfBirth')} name='dateOfBirth'  />
             {/* <DatePicker selected={startDate} name='dateOfBirth'  onChange={(date,e) => {
                 setStartDate(date)
                 //  console.log( new Date(e.timeStamp * 1000))
@@ -336,20 +350,21 @@ console.log(employeeData);
         </div>
         <div className='input-type'>
             <label htmlFor='startDate'>Start Date</label>
-            <input type="date" className='input-style' name='startDate' onChange={changeValue} />  
+            <input type="date" className='input-style' {...register('startDate')} name='startDate'  />  
         </div>
         
         <div className='input-type'>
             <label htmlFor='street'>Street</label>
-            <input type='text' className='input-style' required onChange={changeValue} name='street' />   
+            <input type='text' className='input-style' {...register('street')} name='street' />   
         </div>
         <div className='input-type'>
             <label htmlFor='city'>City</label>
-            <input type='text' className='input-style' required onChange={changeValue} name='city' />   
+            <input type='text' className='input-style' {...register('city')}  name='city' />   
         </div>
         <div className='input-type'>
             <label htmlFor='state'>State</label>
-            <select name='state' onChange={changeValue} >
+            
+            <select name='state' {...register('state')} >
                 <option></option>
                 {
                     states.map( (state) => {
@@ -360,11 +375,11 @@ console.log(employeeData);
         </div>
         <div className='input-type'>
             <label htmlFor='zipcode'>Zip Code</label>
-            <input className='input-style' type='text' required onChange={changeValue} name='zipcode'/>   
+            <input className='input-style' type='text' {...register('zipcode')} name='zipcode'/>   
         </div>
         <div className='input-type'>
             <label htmlFor='departement'>Departement</label>
-           <select name="departement" onChange={changeValue}>
+           <select name="departement" {...register('departement')} >
             <option></option>
             <option>Sales</option>
             <option>Marketing</option>
