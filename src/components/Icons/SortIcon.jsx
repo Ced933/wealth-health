@@ -1,3 +1,4 @@
+import "../../page/EmployeeList/EmployeeList.scss";
 const SortIcon = (props) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -7,6 +8,7 @@ const SortIcon = (props) => (
       stroke="currentColor"
       {...props}
       width={20}
+      className="cursor"
     >
       <path
         strokeLinecap="round"

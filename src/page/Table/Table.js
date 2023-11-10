@@ -20,7 +20,7 @@ import {
 import SortIcon from "../../components/Icons/SortIcon"
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-import Filters from './Filters';
+// import Filters from './Filters';
 
 const columns = [
   {
@@ -28,49 +28,52 @@ const columns = [
     header: "First name",
     size: 225,
     // cell: EditableCell,
-    enableColumnFilter: true,
-    filterFn: "includesString",
+    // enableColumnFilter: true,
+    // filterFn: "includesString",
   },
   {
     accessorKey: "lastName",
     header: "Last name",
     // cell: StatusCell,
-    enableSorting: true,
-    enableColumnFilter: true,
-    filterFn:  "includesString",
+    // enableSorting: true,
+    // enableColumnFilter: true,
+    // filterFn:  "includesString",
     
   },
-
-//   {
-//     accessorKey: "notes",
-//     header: "Notes",
-//     size: 225,
-//     // cell: EditableCell,
-//   },
   { 
   accessorKey:'dateOfBirth', 
     header: 'Date of Birth',
-    enableSorting: true,
+    // enableSorting: true,
+    // enableColumnFilter: true,
+    // filterFn: "includesString",
 
   },
   {accessorKey:'startDate', 
     header: 'Start date',
-    enableSorting: true,
+    // enableSorting: true,
+    // enableColumnFilter: true,
+    // filterFn: "includesString",
   },
   
   {accessorKey:'zipcode', 
     header: 'Zipcode',
-    enableSorting: true,
+    // enableSorting: true,
+    // enableColumnFilter: true,
+    // filterFn: "includesString",
    
   },
   {accessorKey:'state', 
     header: 'state',
-    enableSorting: true,
+    // enableSorting: true,
+    // enableColumnFilter: true,
+    // filterFn: "includesString",
    
   },
   { accessorKey:'departement', 
     header: 'Departement',
-    enableSorting: true,
+    // enableSorting: true,
+    // enableColumnFilter: true,
+    // filterFn: "includesString",
   
   },
 ];
@@ -79,13 +82,16 @@ export default function Table() {
     const employee = useSelector(state => state.employee.employeeInfo)
   const [data, setData] = useState(employee);
   const [columnFilters, setColumnFilters] = useState([]);
+  const [filtering, setFiltering] = useState("");
 
   const table = useReactTable({
     data,
     columns,
     state: {
       columnFilters,
+      globalFilter:filtering
     },
+    onGlobalFilterChanged:setFiltering,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -108,10 +114,8 @@ export default function Table() {
 
   return (
     <div>
-      <Filters
-        columnFilters={columnFilters}
-        setColumnFilters={setColumnFilters}
-      />
+        <input type="text"  value={filtering} placeholder='Search all columns' onChange={e=>(setFiltering(e.target.value))} />
+    
        <Link to={'/'}>
             Home
         </Link>
