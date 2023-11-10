@@ -128,9 +128,6 @@ export default function Table() {
                 {header.column.columnDef.header}
                 {header.column.getCanSort() && (
                   <SortIcon
-                   
-                    mx={3}
-                    fontSize={14}
                     onClick={header.column.getToggleSortingHandler()}
                   />
                 )}
@@ -145,6 +142,7 @@ export default function Table() {
           </tr>
         ))}
 </thead>
+<tbody>
         {table.getRowModel().rows.map((row) => (
           <tr className="tr" key={row.id}>
             {row.getVisibleCells().map((cell) => (
@@ -154,6 +152,7 @@ export default function Table() {
             ))}
           </tr>
         ))}
+        </tbody>
       </table>
       <br />
       {/* pagination  */}
@@ -180,11 +179,10 @@ export default function Table() {
         <select 
         value={table.getState().pagination.pageSize}
         onChange={(e) => {
-            table.setPageSize(Number(e.target.value))
+            table.setPageSize(Number(e.target.value));
         }}
         >
-{
-    [1,2,3].map((pageSize)=>{
+{[10,20,30].map((pageSize)=>{
 
        return <option key={pageSize} value={pageSize}>
             
@@ -192,8 +190,7 @@ export default function Table() {
             
         </option>
 
-    })
-}
+    })}
         </select>
       </div>
 

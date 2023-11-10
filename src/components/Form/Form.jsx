@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import DatePicker from "react-datepicker";
+import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import './Form.scss';
@@ -17,14 +17,26 @@ const {register, handleSubmit, reset, setError } = useForm();
 
 const [popupShow, setPopupShow] = useState(false);
 // setPopupShow(false);
+let valueBirth;
+console.log(valueBirth);
+const [startBirth, setStartBirth] = useState(new Date())
+valueBirth = startBirth.toLocaleDateString('fr-FR');
+
+let valueStartDate;
+console.log(valueStartDate);
+const [startDate, setStartDate] = useState(new Date())
+valueStartDate = startDate.toLocaleDateString('fr-FR');
+
+console.log(valueBirth)
+console.log(valueStartDate)
 console.log(popupShow)
 const dispatch = useDispatch();
-useEffect(()=>{
-    if(popupShow){
-        setPopupShow(false)
-    }
+// useEffect(()=>{
+//     if(popupShow){
+//         setPopupShow(false)
+//     }
 
-},[popupShow])
+// },[popupShow])
     // const [employeeData, setEmployeeData] = useState({
     //     firstName: "",
     //     lastName:"",
@@ -67,8 +79,8 @@ useEffect(()=>{
             payload:{
                 firstName: data.firstName,
                 lastName : data.lastName,
-                dateOfBirth: data.dateOfBirth,
-                startDate: data.startDate,
+                dateOfBirth: valueBirth,
+                startDate: valueStartDate,
                 street: data.street,
                 city:data.city,
                 zipcode:data.zipcode,
@@ -349,17 +361,14 @@ useEffect(()=>{
         </div>
         <div className='input-type'>
             <label htmlFor='date-of-birth'>Date of Birth</label>
-            <input type="date" className='input-style' required {...register('dateOfBirth')} name='dateOfBirth'  />
-            {/* <DatePicker selected={startDate} name='dateOfBirth'  onChange={(date,e) => {
-                setStartDate(date)
-                //  console.log( new Date(e.timeStamp * 1000))
-                console.log(e.nativeEvent.srcElement.attributes[1].ownerDocument.activeElement.value
-                    )
-                 }} /> */}
+            {/* <input type="date" className='input-style' required {...register('dateOfBirth')} name='dateOfBirth'  /> */}
+            <DatePicker  onChange={(date) => setStartBirth(date)} name='dateOfBirth' value={valueBirth} />
+
         </div>
         <div className='input-type'>
             <label htmlFor='startDate'>Start Date</label>
-            <input type="date" className='input-style' required {...register('startDate')} name='startDate'  />  
+            <DatePicker  onChange={(date) => setStartDate(date)} name='startDate' value={valueStartDate}  />
+            {/* <input type="date" className='input-style' required {...register('startDate')} name='startDate'  />   */}
         </div>
         
         <div className='input-type'>
