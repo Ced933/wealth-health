@@ -10,6 +10,9 @@ export default function Home() {
         <Link to={'/employee'}>
             Current employee
         </Link>
+        <Link to={'/table'}>
+            table
+        </Link>
         <h1 className='h1-title'>Create Employee</h1>
         <Form/>
     </div>
