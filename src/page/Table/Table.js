@@ -140,13 +140,6 @@ export default function Table() {
                     desc: " 🔽",
                   }[header.column.getIsSorted()]
                 }
-                {/* <div
-                  onMouseDown={header.getResizeHandler()}
-                  onTouchStart={header.getResizeHandler()}
-                  className={`resizer ${
-                    header.column.getIsResizing() ? "isResizing" : ""
-                  }`}
-                ></div> */}
               </th>
             ))}
           </tr>
@@ -163,24 +156,47 @@ export default function Table() {
         ))}
       </table>
       <br />
-      <p mb={2}>
-        Page {table.getState().pagination.pageIndex + 1} of{" "}
-        {table.getPageCount()}
-      </p>
-      <div size="sm" variant="outline">
-        <button
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
+      {/* pagination  */}
+     
+      <div className='container-page'>
+        <button onClick={()=>{
+            table.previousPage();
+        }}
+         disabled={!table.getCanPreviousPage()} >
           {"<"}
         </button>
-        <button
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
+
+        <button onClick={()=>{
+            table.nextPage();
+        }}
+         disabled={!table.getCanNextPage()}>
           {">"}
         </button>
+        <span>
+            <div>Page</div> 
+            <strong>{table.getState().pagination.pageIndex + 1} of {" "}{table.getPageCount()}</strong>
+        </span>
+
+        <select 
+        value={table.getState().pagination.pageSize}
+        onChange={(e) => {
+            table.setPageSize(Number(e.target.value))
+        }}
+        >
+{
+    [1,2,3].map((pageSize)=>{
+
+       return <option key={pageSize} value={pageSize}>
+            
+               show {pageSize}
+            
+        </option>
+
+    })
+}
+        </select>
       </div>
+
     </div>
   );
 };
