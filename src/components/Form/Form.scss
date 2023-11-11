@@ -1,30 +1,31 @@
 .form{
-    border: 1px solid black ;
+   
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90%;
+    height: 75%;
     .form-container{
-        width: 20%;
+        border-radius: 5px;
+        width: 40%;
         padding: 30px;
-        background-color: #3849AB;
-        .input-type{
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+       
+        .form-box{
             display: flex;
-            flex-direction: column;
-            margin-bottom: 15px;
-            label{
-                color: #fff;
-            }
-            .input-style{
-                padding: 10px;
-                margin-top: 5Px;
-                border-radius: 10px;
-                background-color: transparent;
-                border: 2px solid #fff;
-                color: #fff;
+            justify-content: center;
+            
+            .part-one{
+                width: 48%;
+               padding: 10px;
                 
             }
-            
+            .part-two{
+                width: 48%;
+                padding: 10px;
+                
+            }
         }
         .button{
             width: 100%;
@@ -34,5 +35,23 @@
             color: #fff;
             border: 1px solid #000;
         }
+    }
+}
+.input-type{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    label{
+        color: #000;
+    }
+    .input-style{
+        padding: 4px;
+        margin-top: 5px;
+        border-radius: 5px;
+        width: 100%;
+        background-color: transparent;
+        border: 1px solid #000;
+        color: #000;
+        
     }
 }

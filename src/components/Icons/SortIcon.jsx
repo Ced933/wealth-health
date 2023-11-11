@@ -1,4 +1,4 @@
-import "../../page/EmployeeList/EmployeeList.scss";
+import "../../page/Table/Table.scss";
 const SortIcon = (props) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
