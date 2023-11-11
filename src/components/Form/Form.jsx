@@ -62,9 +62,11 @@ const dispatch = useDispatch();
 
     const onSubmit = (data)=>{
         console.log(data)
-        console.log(data.firstName)
-        // console.log(employeeData.firstName);
+       
       
+        // reset nos date à 0 apres envoie  
+        setStartBirth(new Date());
+        setStartDate(new Date())
         // si le formulaire est soumis alors on envoie le popup 
         setPopupShow(true)
 
@@ -344,9 +346,8 @@ const dispatch = useDispatch();
  return (
     <form onSubmit={handleSubmit(onSubmit)} className='form'>
         {/* si popupshow = à true alors on affiche le popup  */}
-       {
-        popupShow && <PopUp/>
-       } 
+     <PopUp  trigger={popupShow} setTrigger={setPopupShow} />
+        
         <div className='form-container'>
 
         
@@ -362,13 +363,13 @@ const dispatch = useDispatch();
         <div className='input-type'>
             <label htmlFor='date-of-birth'>Date of Birth</label>
             {/* <input type="date" className='input-style' required {...register('dateOfBirth')} name='dateOfBirth'  /> */}
-            <DatePicker  onChange={(date) => setStartBirth(date)} name='dateOfBirth' value={valueBirth} />
+            <DatePicker showYearDropdown maxDate={new Date()} onChange={(date) => setStartBirth(date)} name='dateOfBirth' value={valueBirth} />
 
         </div>
         <div className='input-type'>
             <label htmlFor='startDate'>Start Date</label>
-            <DatePicker  onChange={(date) => setStartDate(date)} name='startDate' value={valueStartDate}  />
-            {/* <input type="date" className='input-style' required {...register('startDate')} name='startDate'  />   */}
+            {/* Tous les jours sauf le samedi et dimanche  */}
+            <DatePicker filterDate={date=>date.getDay()!=6 && date.getDay()!=0} showYearDropdown onChange={(date) => setStartDate(date)} name='startDate' value={valueStartDate}  />
         </div>
         
         <div className='input-type'>

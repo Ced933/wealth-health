@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './PopUp.scss';
 
-export default function PopUp() {
+export default function PopUp(props) {
     // si show = a true alors la pop est activé si show est égale à false alors la popup disparaît 
     const [show, setShow] = useState(true);
 
@@ -9,7 +9,7 @@ export default function PopUp() {
         // cette fonction fait disparaitre la popUp 
         setShow(false)
     }
-  return (
+  return (props.trigger)?(
     <>
     {
         show ? (<div className='popup-container'>
@@ -17,7 +17,7 @@ export default function PopUp() {
            
         </div>
         <div className='popup-box'>
-            <div onClick={(e) => closeModal(e)} className='div-img-cross'>
+            <div onClick={() => props.setTrigger(false)} className='div-img-cross'>
 
                 <img className='img-cross' src='./signe-de-la-croix.png' />
             </div>
@@ -27,6 +27,6 @@ export default function PopUp() {
     }
     
     
-    </>
-  )
+    </>) : ""
+  
 }
