@@ -79,11 +79,14 @@ export default function Table() {
 
     return (
         <div className='table-container'>
+            <div className='table-box'>
+
+            
             <div className='header-table'>
                 <h1 className='h1-table'>View Current Employees</h1>
                 <Link className='link' to={'/'}> Home </Link>
             </div>
-             <input type="text"  value={filtering} placeholder='Search all columns' onChange={e=>(setFiltering(e.target.value))} />
+             <input className='input-search' type="text"  value={filtering} placeholder='Search all columns' onChange={e=>(setFiltering(e.target.value))} />
             <table className="table" w={table.getTotalSize()}>
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -148,11 +151,12 @@ export default function Table() {
                 >
                     {[10,20,30].map((pageSize)=>
                     {
-                    return <option key={pageSize} value={pageSize}>        
-                                show {pageSize}
+                    return <option className='option' key={pageSize} value={pageSize}>        
+                                Show {pageSize}
                             </option>
                     })}
                 </select>
+            </div>
             </div>
         </div>
     );
