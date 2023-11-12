@@ -56,6 +56,22 @@ export default function () {
         })
         // vider le formulaire 
         reset()
+        // petit backup grâce au localstorage  
+
+        const employees = JSON.parse(localStorage.getItem('employees')) || [];
+        const employee = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            dateOfBirth: valueBirth,
+            startDate: valueStartDate,
+            departement: valueDepartement,
+            street:  data.street ,
+            city: data.city,
+            state: valueStates,
+            zipcode: data.zipcode
+        };
+        employees.push(employee);
+        localStorage.setItem('employees', JSON.stringify(employees));
     }
 
     function onChangeInputDep(value){

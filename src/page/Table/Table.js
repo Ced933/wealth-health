@@ -1,5 +1,5 @@
 import './Table.scss';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -9,7 +9,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import SortIcon from "../../components/Icons/SortIcon"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 
 export default function Table() {
@@ -44,16 +44,17 @@ export default function Table() {
       },
     ];
 
-    const employee = useSelector(state => state.employee.employeeInfo)
-    const [data, setData] = useState(employee);
-    const [columnFilters, setColumnFilters] = useState([]);
+    const employee = useSelector(state => state.employee.employeeInfo);
+    const storageEmployee = JSON.parse(localStorage.getItem('employees'));
+    console.log(storageEmployee);
+    console.log(employee);
+    const [data, setData] = useState(storageEmployee ?storageEmployee:employee);
     const [filtering, setFiltering] = useState("");
 
     const table = useReactTable({
         data,
         columns,
         state: {
-        columnFilters,
         globalFilter:filtering
         },
         onGlobalFilterChanged:setFiltering,
