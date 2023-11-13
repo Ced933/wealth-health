@@ -1,5 +1,4 @@
 .popup-container{
-   
     position: fixed;
     top: 0;
     left: 0;
@@ -24,6 +23,7 @@
         padding: 5px;
         z-index: 3;
         position: relative;
+        
         .div-img-cross{
             position: absolute;
             right: -5%;
@@ -36,11 +36,34 @@
             align-items: center;
             border-radius: 50%;
             cursor: pointer;
+            box-shadow: 1px 1px 20px #8b8b8c;
 
-            .img-cross{
-                width: 15px;
-                height: 15px;
-            }
+            .span-cross {
+                width: 25px;
+                height: 25px;
+                position: relative;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    background: #fff;
+                    left: 50%;
+                    width: 4px;
+                    margin-left: -5%;
+                    height: 26px;
+                    transform: rotate(-135deg);
+                }
+                &::after{
+                    content: "";
+                    position: absolute;
+                    background: #fff;
+                    top: 50%;
+                    height: 4px;
+                    margin-top: -5%;
+                    width: 26px;
+                    transform: rotate(45deg);
+                    
+                }
+             }
         }
         h2{
             text-align: center;

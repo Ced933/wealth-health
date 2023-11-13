@@ -144,7 +144,7 @@ export default function Table() {
                     <strong>{table.getState().pagination.pageIndex + 1} of {" "}{table.getPageCount()}</strong>
                 </span>
 
-                <select 
+                <select aria-label='select'
                 value={table.getState().pagination.pageSize}
                 onChange={(e) => {
                     table.setPageSize(Number(e.target.value));

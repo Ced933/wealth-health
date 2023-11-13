@@ -19,6 +19,8 @@ export default function () {
     const [valueDepartement, setValueDepartement] = useState();
     // variable qui active le popUp 
     const [popupShow, setPopupShow] = useState(false);
+    // variable pour personaliser son message dans la popup 
+    const [message] = useState("Employee Created !");
     // variable qui récupère la value de birthday 
     let valueBirth;
     const [startBirth, setStartBirth] = useState(new Date())
@@ -88,7 +90,7 @@ export default function () {
 
  return (
     <>
-        <PopUp trigger={popupShow} setTrigger={setPopupShow} />
+        <PopUp message={message} trigger={popupShow} setTrigger={setPopupShow} />
         <form onSubmit={handleSubmit(onSubmit)} className='form'>
         
             <div className='form-container'>
