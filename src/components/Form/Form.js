@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import Select from 'react-select';
 import "react-datepicker/dist/react-datepicker.css";
 import './Form.scss';
 import { useDispatch } from 'react-redux';
-import PopUp from '../popUp/PopUp';
+import { PopUp } from 'my-modal-component-4-op';
 import { useForm } from 'react-hook-form';
 import DataState from '../../Data/DataState';
 import DataDepartement from'../../Data/DataDepartement'; 
